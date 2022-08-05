@@ -1,0 +1,7 @@
+[{"idour_dishes":1, "name":"tasty food", "description":"", "p":"", "price":16.0, "stars":4.5, "img":"dish-1.png"},
+ {"idour_dishes":2, "name":"tasty food", "description":"", "p":"", "price":16.0, "stars":5.0, "img":"dish-2.png"},
+ {"idour_dishes":3, "name":"tasty food", "description":"", "p":"", "price":16.0, "stars":3.5, "img":"dish-3.png"},
+ {"idour_dishes":4, "name":"tasty food", "description":"", "p":"", "price":16.0, "stars":2.5, "img":"dish-4.png"},
+ {"idour_dishes":5, "name":"dish five", "description":"", "p":"", "price":15.0, "stars":4, "img":"dish-5.png"},
+ {"idour_dishes":6, "name":"tasty food", "description":"", "p":"", "price":16.0, "stars":1.5, "img":"dish-6.png"}
+]
