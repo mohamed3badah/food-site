@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import Product from "./product";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import data from "src/data";
 class ShoppingCart extends Component {
   render() {
     // this.props.update()
-    let items = this.props.items
-    let shipping = 20.00
+    let items = this.props.items;
+    let shipping = 20.0;
     let totPrice = 0;
-    items.map((p)=>{
-      totPrice += parseFloat(p.totPrice)
-    })
+    items.map((p) => {
+      totPrice += parseFloat(p.totPrice);
+    });
     return (
       <section id={`check-out`}>
         <div className="container mt-5 p-3 rounded cart">
           <div className="row no-gutters">
             <div className="col-md-8">
               <div className="product-details mr-2">
-                <NavLink to={`/menu`} >
+                <NavLink to={`/menu`}>
                   <div className="d-flex flex-row align-items-center">
                     <i className="fa fa-long-arrow-left"></i>
                     <span className="ml-2">Continue Shopping</span>
@@ -36,12 +36,12 @@ class ShoppingCart extends Component {
                   </div>
                 </div>
                 {this.props.items.map((product) => (
-                    <Product
-                        key={product.id}
-                        item={product}
-                        onDelete={this.props.onDelete}
-                        onIncrement={this.props.onIncrement}
-                    ></Product>
+                  <Product
+                    key={product.id}
+                    item={product}
+                    onDelete={this.props.onDelete}
+                    onIncrement={this.props.onIncrement}
+                  ></Product>
                 ))}
               </div>
             </div>
@@ -49,15 +49,15 @@ class ShoppingCart extends Component {
               <div className="payment-info">
                 <div className="d-flex justify-content-between align-items-center">
                   <span>Card details</span>
-                  <img
-                    className="rounded"
-                    src="https://i.imgur.com/WU501C8.jpg"
-                    width="30"
-                  />
                 </div>
                 <span className="type d-block mt-3 mb-1">Card type</span>
                 <label className="radio">
-                  <input type="radio" name="card" value="payment" defaultChecked={true} />{" "}
+                  <input
+                    type="radio"
+                    name="card"
+                    value="payment"
+                    defaultChecked={true}
+                  />{" "}
                   <span>
                     <img
                       width="30"

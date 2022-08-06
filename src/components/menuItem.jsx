@@ -70,9 +70,12 @@ function MenuItem(props) {
       <h3>{item["description"]}</h3>
       <p>{item["p"]}</p>
       <span>{`$${item["price"]}`}</span>
-      <NavLink to="/" className="btn">
+      <button
+        className="btn"
+        onClick={() => props.cart(item["idour_dishes"], "menu")}
+      >
         add to cart
-      </NavLink>
+      </button>
     </div>
   );
 }

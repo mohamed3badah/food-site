@@ -96,6 +96,30 @@ class App extends Component {
     });
     this.setState({ cart: cart });
   };
+  addToCart = (id, type) => {
+    let isFinished = false;
+    let cart = [...this.state.cart];
+    cart.forEach((item) => {
+      if (parseInt(id) === parseInt(item.id) && type === item.type) {
+        item.num++;
+        item.totPrice = +item.price * +item.num;
+        isFinished = true;
+        return this.setState({ cart: cart });
+      }
+    });
+    if (!isFinished) {
+      switch (type) {
+        case "dishes":
+          let newCartDish = this.setCartDishes(id)[0];
+          cart.push(newCartDish);
+          return this.setState({ cart: cart });
+        case "menu":
+          let newCartMenu = this.setCartMenu(id)[0];
+          cart.push(newCartMenu);
+          return this.setState({ cart: cart });
+      }
+    }
+  };
 
   deleteHandler = (id, type) => {
     // clone and edit
@@ -159,17 +183,19 @@ class App extends Component {
     switch (type) {
       case "dishes":
         let dishIndex = dishes.indexOf(id);
-        if (dishIndex > -1) { // only splice array when item is found
+        if (dishIndex > -1) {
+          // only splice array when item is found
           dishes.splice(dishIndex, 1); // 2nd parameter means remove one item only
-        } else{
+        } else {
           dishes.unshift(id);
         }
         break;
       case "menu":
         let menuIndex = menu.indexOf(id);
-        if (menuIndex > -1) { // only splice array when item is found
+        if (menuIndex > -1) {
+          // only splice array when item is found
           menu.splice(menuIndex, 1); // 2nd parameter means remove one item only
-        } else{
+        } else {
           menu.unshift(id);
         }
         break;
@@ -202,42 +228,43 @@ class App extends Component {
     });
     return favMenu;
   };
-  // getCartDishes = () => {
-  //   let allDishes = [...dishes];
-  //   let stateCartDishes = this.state.cart.dishes;
-  //   const cartDishes = [];
-  //   allDishes.filter((dish) => {
-  //     stateCartDishes.forEach((d) => {
-  //       if (parseInt(dish["idour_dishes"]) === parseInt(d["id"])) {
-  //         cartDishes.push({
-  //           id: dish["idour_dishes"],
-  //           type: "dish",
-  //           price: dish["price"],
-  //           num: d["num"],
-  //         });
-  //       }
-  //     });
-  //   });
-  //   return cartDishes;
-  // };
-  // getCartMenus = () => {
-  //   let allMenu = [...menu];
-  //   let stateCartMenu = this.state.cart.menu;
-  //   const cartMenu = [];
-  //   allMenu.filter((item) => {
-  //     stateCartMenu.forEach((d) => {
-  //       if (parseInt(item["idour_dishes"]) === parseInt(d["id"])) {
-  //         cartMenu.push({
-  //           id: item["idour_dishes"],
-  //           type: "menu",
-  //           price: item["price"],
-  //           num: d["num"],
-  //         });
-  //       }
-  //     });
-  //   });
-  //   return cartMenu;
-  // };
+
+  setCartDishes = (id) => {
+    let allDishes = [...dishes];
+    const cartDishes = [];
+    allDishes.forEach((d) => {
+      if (parseInt(id) === parseInt(d["idour_dishes"])) {
+        cartDishes.push({
+          id: d["idour_dishes"],
+          type: "dishes",
+          name: d["name"],
+          price: d["price"],
+          num: 1,
+          img: d["img"],
+          totPrice: d["price"],
+        });
+      }
+    });
+    return cartDishes;
+  };
+  setCartMenu = (id) => {
+    let allMenu = [...menu];
+    const cartMenu = [];
+    allMenu.forEach((m) => {
+      if (parseInt(id) === parseInt(m["idour_dishes"])) {
+        cartMenu.push({
+          id: m["idour_dishes"],
+          type: "menu",
+          name: m["name"],
+          price: m["price"],
+          num: 1,
+          img: m["img"],
+          totPrice: m["price"],
+        });
+      }
+    });
+    return cartMenu;
+  };
   render() {
     let allDishes = [...dishes];
     let allMenu = [...menu];
@@ -245,9 +272,7 @@ class App extends Component {
     let loveMenu = [...this.state.love["menu"]];
     return (
       <React.Fragment>
-        <Navbar
-          itemsCount={this.state.items.filter((p) => p.count > 0).length}
-        />
+        <Navbar itemsCount={this.state.cart.filter((p) => p.num > 0).length} />
         <main className="container">
           <Routes>
             <Route
@@ -255,6 +280,7 @@ class App extends Component {
               element={
                 <Dishes
                   love={this.addToLove}
+                  cart={this.addToCart}
                   loveData={loveDishes}
                   data={allDishes}
                 />
@@ -266,6 +292,7 @@ class App extends Component {
               element={
                 <Menu
                   love={this.addToLove}
+                  cart={this.addToCart}
                   loveData={loveMenu}
                   data={allMenu}
                 />
@@ -279,6 +306,7 @@ class App extends Component {
               element={
                 <Search
                   love={this.addToLove}
+                  cart={this.addToCart}
                   loveDishes={loveDishes}
                   loveMenu={loveMenu}
                   dishes={allDishes}
@@ -292,6 +320,7 @@ class App extends Component {
               element={
                 <Search
                   love={this.addToLove}
+                  cart={this.addToCart}
                   loveDishes={loveDishes}
                   loveMenu={loveMenu}
                   dishes={this.getFavDishes()}
