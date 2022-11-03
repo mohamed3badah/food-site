@@ -7,6 +7,14 @@
     "price": 0.0,
     "stars": 4,
     "img": "pic-1.png"
+  },  {
+    "idour_dishes": 1,
+    "name": "sdfsdff MR",
+    "description": "",
+    "p": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consequatur fuga ipsa nam omnis. Accusamus aliquid aperiam asperiores aspernatur deserunt, ",
+    "price": 0.0,
+    "stars": 4,
+    "img": "pic-1.png"
   },
   {
     "idour_dishes": 2,

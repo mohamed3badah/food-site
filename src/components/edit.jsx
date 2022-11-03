@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Edit(props) {
+const Edit = (props) => {
   let params = useParams();
   let id = parseInt(params.id, 10);
   let product = props.getInvoice(id);

@@ -39,6 +39,8 @@ function Swipper(props) {
   return (
     <div className="home">
       <Swiper
+          style={{  "--swiper-navigation-color": "green",
+          }}
         loop={true}
         spaceBetween={10}
         navigation={true}
